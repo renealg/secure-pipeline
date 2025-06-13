@@ -19,8 +19,8 @@ jobs:
 
     - name: Build and run security scanner
       run: |
-        docker build -t my-secure-pipeline .
-        docker run --rm my-secure-pipeline
+        docker build -t image .
+        docker run --rm image
 
     - name: Upload scan reports
       uses: actions/upload-artifact@v3
