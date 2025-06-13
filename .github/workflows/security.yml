@@ -20,7 +20,7 @@ jobs:
     - name: Build and run security scanner
       run: |
         docker build -t image .
-        docker run --rm image
+        docker run --rm -v ${{ github.workspace }}/reports:/code/reports image
 
     - name: Upload scan reports
       uses: actions/upload-artifact@v4
