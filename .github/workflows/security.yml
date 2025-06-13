@@ -1,0 +1,29 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build and run security scanner
+      run: |
+        docker build -t my-secure-pipeline .
+        docker run --rm my-secure-pipeline
+
+    - name: Upload scan reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-reports
+        path: reports/
